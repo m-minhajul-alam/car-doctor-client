@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 
-const Login = () => {
+const SingUp = () => {
     const handelSubmit = event => {
         event.preventDefault();
     };
@@ -13,8 +13,14 @@ const Login = () => {
                     <img src={img} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <h1 className="text-3xl text-center font-bold">Login</h1>
+                    <h1 className="text-3xl text-center font-bold">Sing Up</h1>
                     <form onSubmit={handelSubmit} className="card-body">
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="email" name="name" placeholder="name" className="input input-bordered" required />
+                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -31,14 +37,14 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <input className="btn btn-error" type="submit" value="Login" />
+                            <input className="btn btn-error" type="submit" value="Sing Up" />
                         </div>
                     </form>
-                    <p className="text-center">Have No Account? Please <Link to={"/singup"}><span className="text-orange-500 font-bold">Sing Up</span></Link></p>
+                    <p className="text-center">Alredy Have Accout? Please <Link to={"/login"}><span className="text-orange-500 font-bold">Login</span></Link></p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SingUp;
