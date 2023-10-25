@@ -1,4 +1,3 @@
-
 const ServiceCard = ({ service }) => {
     const { title, img, price } = service;
 
