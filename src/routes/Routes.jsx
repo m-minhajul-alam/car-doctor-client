@@ -5,6 +5,8 @@ import Login from "../pages/login/Login";
 import SingUp from "../pages/singup/SingUp";
 import CheakOut from "../pages/cheakOut/CheakOut";
 import Bookings from "../pages/bookings/Bookings";
+import PrivateRoute from "./PrivedRouter";
+import About from "../pages/home/about/About";
 
 const router = createBrowserRouter([
     {
@@ -17,12 +19,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/cheakout/:id',
-                element: <CheakOut></CheakOut>,
+                element: <PrivateRoute><CheakOut></CheakOut></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
             },
             {
-              path: 'bookings', 
-              element: <Bookings></Bookings>
+                path: 'bookings',
+                element: <PrivateRoute><Bookings></Bookings></PrivateRoute>
+            },
+            {
+                path: '/about',
+                element: <About></About>
             },
             {
                 path: '/login',

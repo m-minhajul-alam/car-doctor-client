@@ -1,22 +1,22 @@
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { AuthContext } from "../../provider/AuthProvider";
 import BookingRow from "./BookingRow";
-import axios from "axios";
 
 const Bookings = () => {
     const { user } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
 
     const url = `http://localhost:5000/bookings?email=${user?.email}`;
-    useEffect(() => {
 
-        axios.get(url, {withCredentials: true})
-        .then(res => {
-            setBookings(res.data);
-        })
-        // fetch(url)
-        //     .then(res => res.json())
-        //     .then(data => setBookings(data))
+    useEffect(() => {
+        // axios.get(url, { withCredentials: true })
+        //     .then(res => {
+        //         setBookings(res.data);
+        //     })
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setBookings(data))
     }, [url]);
 
     const handleDelete = id => {
@@ -27,9 +27,9 @@ const Bookings = () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     if (data.deletedCount > 0) {
-                        alert('deleted successful');
+                        alert('Deleted Successful');
                         const remaining = bookings.filter(booking => booking._id !== id);
                         setBookings(remaining);
                     }
@@ -47,7 +47,7 @@ const Bookings = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.modifiedCount > 0) {
                     // update state
                     const remaining = bookings.filter(booking => booking._id !== id);
@@ -61,17 +61,13 @@ const Bookings = () => {
 
     return (
         <div>
-            <h2 className="text-5xl">Your bookings: {bookings.length}</h2>
+            <h2 className="text-3xl font-bold text-center my-6">Your Bookings Count: {bookings.length}</h2>
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* head */}
                     <thead>
                         <tr>
-                            <th>
-                                <label>
-                                    <input type="checkbox" className="checkbox" />
-                                </label>
-                            </th>
+                            <th>Delete</th>
                             <th>Image</th>
                             <th>Service</th>
                             <th>Date</th>
